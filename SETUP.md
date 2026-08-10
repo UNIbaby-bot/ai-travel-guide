@@ -59,8 +59,7 @@ php -S localhost:8000
   並確認 `frontend/` 與 `backend/` 相對位置維持不變即可（`api.js` 用的是相對路徑）。
 
 ## 5. 資料庫管理工具（開發用，選用）
-如果你想要像以前學資料庫時用的 phpMyAdmin 那樣，直接用網頁瀏覽/新增/修改/刪除資料庫裡任何一張表的任何一列資料
-（不用寫程式、不用透過網站的管理後台），可以用專案裡已經放好的 **Adminer**（`tools/adminer.php`，單一檔案的免安裝版
+可以用專案裡已經放好的 **Adminer**（`tools/adminer.php`，單一檔案的免安裝版
 phpMyAdmin 替代品）：
 
 1. 照第 2 步一樣，在專案根目錄執行 `php -S localhost:8000`
@@ -80,7 +79,7 @@ phpMyAdmin 替代品）：
 
 ### 5.1 讓網站直接連到 MySQL（在 phpMyAdmin 改資料，網站會跟著變）
 phpMyAdmin 只能連 MySQL/MariaDB，不能連 SQLite。如果你想要「在 phpMyAdmin 裡新增/修改/刪除的資料，
-網站畫面會直接反映出來」，就要讓網站本身也連到同一個 MySQL 資料庫，而不是另外開一份練習用的拷貝。
+網站畫面會直接反映出來」，就要讓網站本身也連到同一個 MySQL 資料庫。
 
 **第一次設定（只要做一次）：**
 1. 打開 phpMyAdmin → 新增一個資料庫，取名例如 `tribewalk_1`，字元集選 `utf8mb4_unicode_ci`
