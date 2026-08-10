@@ -102,23 +102,6 @@ $pass   = '';                     // XAMPP 預設密碼是空的，如果你的 
 之後在 phpMyAdmin 改的資料就會直接反映在網站上，管理後台新增/修改/刪除的資料也會直接寫回 MySQL。
 
 
-> 你想「開箱即用」，把 `$USE_MYSQL` 改回 `false`（就會自動切回本機的
+> 想「開箱即用」，把 `$USE_MYSQL` 改回 `false`（就會自動切回本機的
 > `database/travel.sqlite`，不需要任何額外設定）。
 
-## 6. Git / GitHub
-```bash
-cd ai-travel-guide
-git init
-git add .
-git commit -m "init: AI 輔助旅遊景點推薦平台初始版本"
-# 到 GitHub 建立一個新 Repository 後：
-git remote add origin <你的 repository 網址>
-git branch -M main
-git push -u origin main
-```
-之後每完成一個功能，建議都個別 commit，例如：
-```bash
-git add .
-git commit -m "feat: 新增景點搜尋與分頁功能"
-git push
-```
