@@ -8,7 +8,8 @@
 
 最簡單的方式：安裝 **XAMPP** 或 **Laragon**（Windows）／**MAMP**（Mac），
 裡面會內建 PHP 跟 MySQL，本專案目前預設連線 MySQL（見下方第 5 步）；
-如果不想裝 MySQL，把 `backend/config/db.php` 的 `$USE_MYSQL` 改成 `false` 即可改用 SQLite，開箱即用免額外設定。
+如果不想裝 MySQL，把 `backend/config/db.php` 的 `$USE_MYSQL` 
+改成 `false` 即可改用 SQLite，開箱即用免額外設定。
 
 檢查是否已安裝 PHP，在終端機（命令提示字元）輸入：
 ```bash
@@ -78,7 +79,8 @@ phpMyAdmin 替代品）：
 > 只能管理景點資料、且有登入保護；Adminer 是通用工具，能碰到全部的表，沒有額外的安全防護，單純方便你開發時檢查資料。
 
 ### 5.1 讓網站直接連到 MySQL（在 phpMyAdmin 改資料，網站會跟著變）
-phpMyAdmin 只能連 MySQL/MariaDB，不能連 SQLite。如果你想要「在 phpMyAdmin 裡新增/修改/刪除的資料，
+phpMyAdmin 只能連 MySQL/MariaDB，不能連 SQLite。
+如果你想要「在 phpMyAdmin 裡新增/修改/刪除的資料，
 網站畫面會直接反映出來」，就要讓網站本身也連到同一個 MySQL 資料庫。
 
 **第一次設定（只要做一次）：**
@@ -96,10 +98,11 @@ $dbName = 'tribewalk_1';   // 要跟你在 phpMyAdmin 建立的資料庫名稱�
 $user   = 'root';
 $pass   = '';                     // XAMPP 預設密碼是空的，如果你的 MySQL 有設密碼，填在這裡
 ```
-如果你的 phpMyAdmin 左上角顯示的伺服器、帳號跟這裡不一樣（例如 MAMP 預設帳密常常是
-`root` / `root`，連接埠是 `8889`），照著改成一樣的就好。改完存檔、重新整理網站，
-之後在 phpMyAdmin 改的資料就會直接反映在網站上，管理後台新增/修改/刪除的資料也會直接寫回 MySQL。
-
+如果你的 phpMyAdmin 左上角顯示的伺服器、帳號跟這裡不一樣
+（例如 MAMP 預設帳密常常是`root` / `root`，連接埠是 `8889`），
+照著改成一樣的就好。改完存檔、重新整理網站，
+之後在 phpMyAdmin 改的資料就會直接反映在網站上，
+管理後台新增/修改/刪除的資料也會直接寫回 MySQL。
 
 > 想「開箱即用」，把 `$USE_MYSQL` 改回 `false`（就會自動切回本機的
 > `database/travel.sqlite`，不需要任何額外設定）。
