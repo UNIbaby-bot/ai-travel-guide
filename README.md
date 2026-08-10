@@ -207,7 +207,7 @@ API 成功時會回傳 `success: true`、`message` 與 `data`（資料內容）�
 若透過 Apache 搭配 `.htaccess`，也可以用乾淨路徑呼叫，例如
 `GET /api/attractions`、`POST /api/ai/travel-plan`、`GET /api/dashboard/statistics`。
 
-## AI 功能說明
+## 使用 AI 工具相關說明
 
 依照下表說明實際使用的 AI 工具、用途與產出內容，完整 Prompt 內容見表格下方：
 
@@ -215,14 +215,10 @@ API 成功時會回傳 `success: true`、`message` 與 `data`（資料內容）�
 |---|---|---|---|
 | 關於我們頁面文案（4 段故事） | Claude | 提供創辦初衷的原始想法（國旅衰退、台中旅展的靈感、受 Eatgether 啟發、想陪伴女性旅伴的原因），請 Claude 整理成網站可用的完整文案 | 已完成，見 `frontend/about.html` |
 | 首頁 Banner 標語與文案（3 組，隨輪播切換） | Claude | 根據「關於我們」的核心理念，請 Claude 濃縮成適合首頁第一眼閱讀的標題＋簡短文案 | 已完成，見 `frontend/js/home.js` 的 `HERO_SLIDES` |
-| 一日遊建議 | 系統內建規則（可換成串接真實 AI API） | — | 見 `backend/api/ai_travel_plan.php` |
 | 首頁 Banner 圖（共 3 張） | ChatGPT（DALL·E） | 「清晨雲海」「森林吊橋秘境」「黃昏部落聚落」三種情境，皆為森林系＋蒂芬妮綠風格，避免生成特定族群人物臉孔／祭典畫面 | 已完成，存放於 `frontend/images/hero/`，首頁輪播主視覺使用中；完整 Prompt 見下方 |
 | 網站 LOGO | ChatGPT（DALL·E） | 融合先前三個 LOGO 方向的提示詞（山徑、行走人物、織紋家屋），並額外指定「三位女性一起健行」，呼應網站鎖定的女性揪團旅伴受眾 | 已完成，存放於 `frontend/images/brand/logo.png`，用於全站導覽列與瀏覽器 favicon |
 | 族群分類圖示（9 個族群） | ChatGPT（DALL·E） | 統一風格：扁平插畫風、圓形徽章外框、蒂芬妮綠＋暖金色調，各族群依織布／紋樣特色代入不同花紋描述 | 已完成，存放於 `frontend/images/categories/`（tayal.png、bunun.png…9 個族群各一張），用於景點卡片與篩選選單；完整 Prompt 見下方 |
 | 部落景點封面圖（5 張：紅香、神山、來吉、樂野、茶山） | ChatGPT（DALL·E） | 因找不到合法授權的真實照片，依各部落地理與人文特色（茶園、石板屋、山村、古道、瀑布）分別生成插畫風示意圖 | 已完成，存放於 `frontend/images/attractions/`；完整 Prompt 見下方 |
-
-> 目前 `backend/api/ai_travel_plan.php` 先用規則式文字產生示範內容，方便功能先跑起來；
-> 檔案內有註解說明如何換成真正呼叫 ChatGPT／Claude／Gemini API。
 
 ### 完整 Prompt 記錄
 
@@ -311,9 +307,6 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 
 ## 專案畫面截圖
 
-請把實際截圖放在 `docs/screenshots/` 資料夾，檔名建議如下（跟下方 README 引用的檔名要一致），
-截圖須標示：導覽列、首頁主視覺區、部落卡片、主要按鈕、搜尋／篩選區、內容區塊。
-
 ### 截圖說明
 | 檔名 | 說明 |
 |---|---|
@@ -364,18 +357,13 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 見 [`SETUP.md`](./SETUP.md)。
 
 ## 安全性提醒
-- 管理後台第一次啟動會自動建立預設帳號 `admin` / 密碼 `admin123`，**正式使用或截圖繳交前，
-  請務必登入後至管理後台按「修改密碼」更換掉**，避免任何人都能用預設密碼登入。
+- 管理後台第一次啟動會自動建立預設帳號 `admin` / 密碼 `admin123`，
 - 密碼是用 PHP `password_hash()`（bcrypt）雜湊後才存進資料庫，資料庫裡看不到明碼密碼。
 - 這裡的登入機制是給「管理者自己用」的簡易保護，不是給一般網站訪客註冊的會員系統。
 - 會員（`members`）的密碼同樣是用 bcrypt 雜湊儲存；會員系統跟管理員系統是各自獨立的登入狀態，
   不會互相影響。
-- 評論的照片／影片目前是「貼網址」的形式（例如先上傳到圖床或 YouTube 再貼連結），
-  還沒有串接真正的檔案上傳服務；如果之後要做檔案上傳，建議串接雲端物件儲存服務
-  （例如 Firebase Storage、AWS S3），不要把檔案直接存進資料庫。
-- 揪團申請被核准／拒絕時，目前只會反映在網站畫面上，**還沒有寄送 Email 通知**。
-  實務上應該要在核准／拒絕的當下寄一封通知信，這需要串接真正的郵件服務
-  （例如 PHP `mail()`、SMTP 服務如 Gmail SMTP、SendGrid、Brevo 等），這部分先留給未來擴充。
+- 評論的照片／影片目前是「貼網址」的形式。
+- 揪團申請被核准／拒絕時，目前只會反映在網站畫面上。
 
 ## 部落資料來源與查證提醒
 `database/schema.sql` 目前的部落景點資料，整理自政府開放資料：
@@ -397,31 +385,17 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 自行查詢族群與地區資訊後整理而成（不是直接引用該公司的行程文案內容）。
 目前共 44 筆部落景點、9 個族群分類。
 
-其中少數幾筆部落景點（描述文字內標註「【請確認族群】」）
-是我依一般公開資訊初步判斷的族群歸屬，正式定案前建議你：
-- 對照該部落或地方政府（如原住民族委員會、各縣市原住民行政局處）的官方資料再次確認
-- 若部落本身有粉專或官網，優先以部落自己公開的族群認定為準
-
-確認無誤後，把描述文字裡的「【請確認族群】」字樣刪掉即可。
-
 ## 部落照片來源（Wikimedia Commons）
 以下部落已經換成 Wikimedia Commons 的真實照片，取代原本的灰色佔位圖：
 
 | 部落 | 圖片網址 | 授權／攝影者 |
 |---|---|---|
-| 武界部落 | [連結](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/%E6%AD%A6%E7%95%8C%E6%B0%B4%E7%94%9F%E8%95%A8.jpg/1920px-%E6%AD%A6%E7%95%8C%E6%B0%B4%E7%94%9F%E8%95%A8.jpg) | 【請補上：點進 Commons 該圖片頁面，複製攝影者與授權條款，例如「OOO 攝，CC BY-SA 4.0」】 |
-| 司馬庫斯 | [連結](https://upload.wikimedia.org/wikipedia/commons/5/52/Smangus.jpg) | 【請補上：同上，點進圖片頁面複製攝影者與授權條款】 |
+| 武界部落 | [連結](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/%E6%AD%A6%E7%95%8C%E6%B0%B4%E7%94%9F%E8%95%A8.jpg/1920px-%E6%AD%A6%E7%95%8C%E6%B0%B4%E7%94%9F%E8%95%A8.jpg) |
+| 司馬庫斯 | [連結](https://upload.wikimedia.org/wikipedia/commons/5/52/Smangus.jpg) | 
 
 備選（同一個部落，之後想換圖可以用）：
 - 武界部落：[Overlooking the Zhuoshui River towards Wujie](https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Overlooking_the_Zhuoshui_River_towards_Wujie_in_the_distance.jpg/1920px-Overlooking_the_Zhuoshui_River_towards_Wujie_in_the_distance.jpg)
 - 司馬庫斯：[新竹縣尖石鄉 panoramio](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/%E5%8F%B0%E7%81%A3_%E2%80%A2_%E6%96%B0%E7%AB%B9%E7%B8%A3_%E5%B0%96%E7%9F%B3%E9%84%89_-_panoramio_%283%29.jpg/1920px-%E5%8F%B0%E7%81%A3_%E2%80%A2_%E6%96%B0%E7%AB%B9%E7%B8%A3_%E5%B0%96%E7%9F%B3%E9%84%89_-_panoramio_%283%29.jpg)
-
-**尚待補圖片** → 已改用 AI 生成的示意圖（詳見下方說明），之後找到真實照片歡迎替換。
-
-> ⚠️ 武界部落與司馬庫斯的圖片網址是直接連到 Wikimedia Commons 的圖床（hotlink）。
-> Commons 官方並不建議長期這樣直接連結（連結可能失效、也不算是正式的重製使用），
-> 正式使用前建議：(1) 把圖片下載下來，上傳到你自己的網站或圖床；
-> (2) 依授權條款要求，在網站上（例如頁尾或圖片說明）標註攝影者與授權條款連結。
 
 ## 部落封面圖（AI 生成，示意用，非真實寫真）
 以下 5 個部落因為找不到合法授權的真實照片，先用 ChatGPT（DALL·E）生成示意風景圖代替：
@@ -434,11 +408,10 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 | 樂野部落 | `frontend/images/attractions/leye.jpg` | 森林古道、晨光穿透林間 |
 | 茶山部落 | `frontend/images/attractions/chashan.jpg` | 溪流瀑布、山村景觀 |
 
-> ⚠️ **重要提醒**：這些是 AI 生成的「氛圍示意圖」，**不是**這些部落的真實樣貌，
-> 生成時已刻意避免出現特定族群人物臉孔或祭典畫面。網站上或成果簡報中應清楚註明
-> 「示意圖，非實景」，避免使用者誤以為是真實空拍或街景照片。
-> 若之後取得這些部落的真實授權照片，建議優先替換。
-
+> ⚠️ **重要提醒**：這些是 AI 生成的「氛圍示意圖」，
+**不是**這些部落的真實樣貌，
+> 生成時已刻意避免出現特定族群人物臉孔或祭典畫面。
+> 「示意圖，非實景」， 非真實空拍或街景照片。
 ## 測試紀錄
 
 | 日期 | 測試項目 | 測試方法 | 結果 | 截圖佐證 |
@@ -449,9 +422,6 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 | 2026-08-10 | 表單欄位檢查 | 新增部落景點時不填寫景點名稱、城市、分類直接送出 | 通過，正確顯示「請輸入景點名稱」「請輸入城市或地區」「請選擇分類」錯誤訊息，且不會送出 | [查看截圖](docs/screenshots/tests/test-4-form-validation.png) |
 | 2026-08-10 | 統計圖表 API | 呼叫 `GET /backend/api/dashboard_statistics.php` | 通過，回傳 `success:true`，`data.byCity` 各城市景點數量、`data.byCategory` 各族群景點數量都正確 | [查看截圖](docs/screenshots/tests/test-5-dashboard-api.png) |
 | 2026-08-10 | 揪團申請流程 | 以會員 Wendy 申請加入 Eunice 發起的「司馬庫斯輕旅行」，發起人核准後確認人數更新 | 通過，核准後「已核准成員」名單正確顯示 Eunice、Wendy，人數從 1/4 變成 2/4，進度條同步更新為 50% | [申請前](docs/screenshots/tests/test-6a-group-detail.png) / [核准後](docs/screenshots/tests/test-6b-group-list.png) |
-
-> 小提醒：評量表 A12 只要求「記錄」測試結果，不強制要求截圖；上面的截圖連結是額外附上的操作證據，
-> 讓測試紀錄更有說服力，不是必填項目。
 
 ## 開發者資訊
 | 項目 | 內容 |
