@@ -1,0 +1,18 @@
+RewriteEngine On
+
+# /api/attractions/5  ->  /api/attractions.php?id=5
+RewriteRule ^api/attractions/([0-9]+)/?$ api/attractions.php?id=$1 [QSA,L]
+RewriteRule ^api/attractions/?$ api/attractions.php [QSA,L]
+
+RewriteRule ^api/categories/?$ api/categories.php [QSA,L]
+RewriteRule ^api/ai/travel-plan/?$ api/ai_travel_plan.php [QSA,L]
+RewriteRule ^api/dashboard/statistics/?$ api/dashboard_statistics.php [QSA,L]
+
+# /api/itineraries/5  ->  /api/itineraries.php?id=5
+RewriteRule ^api/itineraries/([0-9]+)/?$ api/itineraries.php?id=$1 [QSA,L]
+RewriteRule ^api/itineraries/?$ api/itineraries.php [QSA,L]
+
+RewriteRule ^api/auth/login/?$ api/auth_login.php [QSA,L]
+RewriteRule ^api/auth/logout/?$ api/auth_logout.php [QSA,L]
+RewriteRule ^api/auth/check/?$ api/auth_check.php [QSA,L]
+RewriteRule ^api/auth/change-password/?$ api/auth_change_password.php [QSA,L]

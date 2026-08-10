@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>走部落 TribeWalk｜AI 輔助部落文化旅遊推薦平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/brand/logo.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+
+<header class="navbar">
+  <button class="nav-toggle" id="nav-toggle-btn" aria-label="選單">☰</button>
+
+  <div class="nav-center" id="nav-center">
+    <div class="nav-col nav-col-left">
+      <a href="attractions.html" data-page="attractions">景點列表</a>
+      <a href="itineraries.html" data-page="itineraries">完整遊程</a>
+      <a href="groups.html" data-page="groups">揪團</a>
+      <a href="about.html" data-page="about">關於我們</a>
+    </div>
+
+    <a href="index.html" class="brand brand-center" data-page="home"><img src="images/brand/logo.png" alt="走部落 TribeWalk" class="brand-logo">走部落 <span>TribeWalk</span></a>
+
+    <div class="nav-col nav-col-right">
+      <div class="nav-account">
+        <a href="admin.html" data-page="admin">管理後台</a>
+        <span id="member-nav-slot"></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero-slideshow" id="hero-slideshow">
+  <div class="hero-slides" id="hero-slides"></div>
+  <div class="hero-overlay"></div>
+  <div class="deco-dot" style="width:70px;height:70px;background:#FFB4A2;top:16%;left:6%;"></div>
+  <div class="deco-dot" style="width:36px;height:36px;background:#F5B942;top:60%;left:12%;animation-delay:1.2s;"></div>
+  <div class="deco-dot" style="width:50px;height:50px;background:#fff;top:22%;right:8%;animation-delay:2.4s;"></div>
+  <div class="hero-content">
+    <h1 id="hero-title">當國旅愈來愈冷清，<br>部落其實一直都在</h1>
+    <p class="lead" id="hero-lead">很多人熟悉東京的巷弄、首爾的夜市，卻沒有真正走進過台灣的部落。走部落收錄各族群的輕旅行景點與完整遊程，還能揪伴同行——用一趟 2～3 天的旅程，重新認識這座島嶼，也認識一群願意一起深入探索的旅伴。</p>
+    <div class="hero-cta-wrap">
+      <a href="attractions.html" class="hero-cta-badge" id="hero-cta">
+        <span class="hero-cta-arc"></span>
+        <span class="hero-cta-text">開始<br>探索部落</span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-dots" id="hero-dots"></div>
+</section>
+
+<section class="section-band section-band-mint">
+  <div class="container">
+  <h2 class="slash-title"><span class="slash">\</span> 走部落怎麼玩 <span class="slash">/</span></h2>
+  <div class="howto-grid">
+    <a href="attractions.html" class="howto-card">
+      <div class="howto-emoji">🏞️</div>
+      <h3>探索部落景點</h3>
+      <p>依族群分類、關鍵字搜尋，找到你想深入認識的部落</p>
+    </a>
+    <a href="itineraries.html" class="howto-card">
+      <div class="howto-emoji">🗓️</div>
+      <h3>參考完整遊程</h3>
+      <p>2～3 天的輕旅行規劃，逐日行程一次看懂</p>
+    </a>
+    <a href="groups.html" class="howto-card">
+      <div class="howto-emoji">🤝</div>
+      <h3>揪伴一起去</h3>
+      <p>發起或加入揪團，找到一起深度旅行的夥伴</p>
+    </a>
+    <a href="attractions.html" class="howto-card">
+      <div class="howto-emoji">⭐</div>
+      <h3>留下真實評價</h3>
+      <p>多面向星級評論，幫助下一位旅人做決定</p>
+    </a>
+    <a href="about.html" class="howto-card">
+      <div class="howto-emoji">🌿</div>
+      <h3>我們的初衷</h3>
+      <p>為什麼想做這個<span style="white-space:nowrap;">平台</span>，推廣部落文化與國旅</p>
+    </a>
+  </div>
+  </div>
+</section>
+
+<section class="section-band section-band-pink">
+  <div class="container">
+  <h2 class="slash-title"><span class="slash">\</span> 精選部落 <span class="slash">/</span></h2>
+  <div id="featured" class="grid"><p>載入中...</p></div>
+  </div>
+</section>
+
+<section class="section-band section-band-cream">
+  <div class="container">
+  <div class="ai-box">
+    <h3>💡 AI 一日遊靈感</h3>
+    <p id="ai-tip">正在請 AI 想點子...</p>
+  </div>
+  </div>
+</section>
+
+<footer class="wavy-footer">
+  <svg class="wave-shape" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,45 L90,18 L180,40 L280,8 L360,32 L460,42 L560,14 L650,38 L760,10 L860,36 L960,20 L1060,40 L1200,15 L1200,60 L0,60 Z" fill="#2FB6A8"/>
+  </svg>
+  <div class="wavy-footer-inner">
+    <nav class="footer-sitemap">
+      <a href="index.html">首頁</a>
+      <a href="attractions.html">景點列表</a>
+      <a href="itineraries.html">完整遊程</a>
+      <a href="groups.html">揪團</a>
+      <a href="about.html">關於我們</a>
+      <a href="member-login.html">會員登入</a>
+      <a href="member-register.html">會員註冊</a>
+      <a href="admin.html">管理後台</a>
+    </nav>
+    <div class="wavy-footer-deco">🏔️ 🌲 ☁️ 🌲 🏔️</div>
+    <p>AI輔助全端程式設計與專案實作班 — 專題實作：AI 輔助部落文化旅遊推薦平台（走部落 TribeWalk）</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/api.js"></script>
+<script src="js/member-nav.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

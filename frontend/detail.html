@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>景點詳細｜走部落 TribeWalk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/brand/logo.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="attractions">
+
+<header class="navbar">
+  <button class="nav-toggle" id="nav-toggle-btn" aria-label="選單">☰</button>
+
+  <div class="nav-center" id="nav-center">
+    <div class="nav-col nav-col-left">
+      <a href="attractions.html" data-page="attractions">景點列表</a>
+      <a href="itineraries.html" data-page="itineraries">完整遊程</a>
+      <a href="groups.html" data-page="groups">揪團</a>
+      <a href="about.html" data-page="about">關於我們</a>
+    </div>
+
+    <a href="index.html" class="brand brand-center" data-page="home"><img src="images/brand/logo.png" alt="走部落 TribeWalk" class="brand-logo">走部落 <span>TribeWalk</span></a>
+
+    <div class="nav-col nav-col-right">
+      <div class="nav-account">
+        <a href="admin.html" data-page="admin">管理後台</a>
+        <span id="member-nav-slot"></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container" id="detail">
+  <p>載入中...</p>
+</main>
+
+<main class="container" id="reviews-section" style="padding-top:0;">
+</main>
+
+<footer class="wavy-footer">
+  <svg class="wave-shape" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,45 L90,18 L180,40 L280,8 L360,32 L460,42 L560,14 L650,38 L760,10 L860,36 L960,20 L1060,40 L1200,15 L1200,60 L0,60 Z" fill="#2FB6A8"/>
+  </svg>
+  <div class="wavy-footer-inner">
+    <nav class="footer-sitemap">
+      <a href="index.html">首頁</a>
+      <a href="attractions.html">景點列表</a>
+      <a href="itineraries.html">完整遊程</a>
+      <a href="groups.html">揪團</a>
+      <a href="about.html">關於我們</a>
+      <a href="member-login.html">會員登入</a>
+      <a href="member-register.html">會員註冊</a>
+      <a href="admin.html">管理後台</a>
+    </nav>
+    <div class="wavy-footer-deco">🏔️ 🌲 ☁️ 🌲 🏔️</div>
+    <p>AI輔助全端程式設計與專案實作班 — 專題實作：AI 輔助部落文化旅遊推薦平台（走部落 TribeWalk）</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/api.js"></script>
+<script src="js/member-nav.js"></script>
+<script src="js/detail.js"></script>
+<script src="js/reviews.js"></script>
+</body>
+</html>

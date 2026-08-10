@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理後台｜走部落 TribeWalk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/brand/logo.png">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-page="admin">
+
+<header class="navbar">
+  <button class="nav-toggle" id="nav-toggle-btn" aria-label="選單">☰</button>
+
+  <div class="nav-center" id="nav-center">
+    <div class="nav-col nav-col-left">
+      <a href="attractions.html" data-page="attractions">景點列表</a>
+      <a href="itineraries.html" data-page="itineraries">完整遊程</a>
+      <a href="groups.html" data-page="groups">揪團</a>
+      <a href="about.html" data-page="about">關於我們</a>
+    </div>
+
+    <a href="index.html" class="brand brand-center" data-page="home"><img src="images/brand/logo.png" alt="走部落 TribeWalk" class="brand-logo">走部落 <span>TribeWalk</span></a>
+
+    <div class="nav-col nav-col-right">
+      <div class="nav-account">
+        <a href="admin.html" data-page="admin">管理後台</a>
+        <span id="member-nav-slot"></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div id="admin-auth-bar" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+    <span id="admin-whoami" style="color:#4a5a63;font-size:0.9rem;"></span>
+    <div>
+      <button id="btn-change-password" class="btn btn-outline btn-sm">修改密碼</button>
+      <button id="btn-logout" class="btn btn-outline btn-sm">登出</button>
+    </div>
+  </div>
+
+  <div class="form-panel" id="change-password-panel" style="display:none;">
+    <h3>修改密碼</h3>
+    <div id="password-alert"></div>
+    <form id="change-password-form">
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="cp-old">目前密碼</label>
+          <input type="password" id="cp-old">
+        </div>
+        <div class="form-row">
+          <label for="cp-new">新密碼（至少 6 個字元）</label>
+          <input type="password" id="cp-new">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm">更新密碼</button>
+    </form>
+  </div>
+
+  <h2>景點資料管理</h2>
+
+  <div class="form-panel">
+    <h3 id="form-title">新增景點</h3>
+    <div id="form-alert"></div>
+    <form id="attraction-form">
+      <input type="hidden" id="f-id">
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="f-name">景點名稱 *</label>
+          <input type="text" id="f-name">
+          <span class="field-error" id="err-name"></span>
+        </div>
+        <div class="form-row">
+          <label for="f-city">城市或地區 *</label>
+          <input type="text" id="f-city">
+          <span class="field-error" id="err-city"></span>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="f-category">族群分類 *</label>
+          <select id="f-category"></select>
+          <span class="field-error" id="err-category"></span>
+        </div>
+        <div class="form-row">
+          <label for="f-image">圖片網址</label>
+          <input type="text" id="f-image" placeholder="https://...">
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="f-desc">介紹文字</label>
+        <textarea id="f-desc"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">儲存</button>
+      <button type="button" id="btn-cancel" class="btn btn-outline" style="display:none;">取消編輯</button>
+    </form>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr><th>名稱</th><th>城市</th><th>族群</th><th>建立時間</th><th>操作</th></tr>
+    </thead>
+    <tbody id="table-body"><tr><td colspan="5">載入中...</td></tr></tbody>
+  </table>
+
+  <h2 style="margin-top:48px;">完整遊程管理</h2>
+
+  <div class="form-panel">
+    <h3 id="itin-form-title">新增遊程</h3>
+    <div id="itin-form-alert"></div>
+    <form id="itinerary-form">
+      <input type="hidden" id="itin-id">
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="itin-name">遊程名稱 *</label>
+          <input type="text" id="itin-name">
+          <span class="field-error" id="itin-err-name"></span>
+        </div>
+        <div class="form-row">
+          <label for="itin-region">區域 *</label>
+          <select id="itin-region">
+            <option value="">請選擇</option>
+            <option value="北部">北部</option>
+            <option value="中部">中部</option>
+            <option value="南部">南部</option>
+            <option value="東部">東部</option>
+          </select>
+          <span class="field-error" id="itin-err-region"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="itin-route">遊程路線 *（可用「第一天：」「→」分隔天數與地點）</label>
+        <textarea id="itin-route" style="min-height:140px;"></textarea>
+        <span class="field-error" id="itin-err-route"></span>
+      </div>
+      <button type="submit" class="btn btn-primary">儲存</button>
+      <button type="button" id="itin-btn-cancel" class="btn btn-outline" style="display:none;">取消編輯</button>
+    </form>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr><th>遊程名稱</th><th>區域</th><th>建立時間</th><th>操作</th></tr>
+    </thead>
+    <tbody id="itin-table-body"><tr><td colspan="4">載入中...</td></tr></tbody>
+  </table>
+
+  <h2 style="margin-top:48px;">揪團管理</h2>
+  <p style="color:#5B6E68;margin-top:-8px;">管理員可以查看所有會員發起的揪團，並強制修改狀態或刪除（例如處理糾紛、違規內容）。</p>
+  <table class="admin-table">
+    <thead>
+      <tr><th>標題</th><th>發起人</th><th>出發日</th><th>人數</th><th>狀態</th><th>操作</th></tr>
+    </thead>
+    <tbody id="admin-groups-table-body"><tr><td colspan="6">載入中...</td></tr></tbody>
+  </table>
+
+  <h2 style="margin-top:40px;">統計圖表</h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr;">
+    <div class="form-panel"><canvas id="chart-city"></canvas></div>
+    <div class="form-panel"><canvas id="chart-category"></canvas></div>
+  </div>
+</main>
+
+<footer class="wavy-footer">
+  <svg class="wave-shape" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,45 L90,18 L180,40 L280,8 L360,32 L460,42 L560,14 L650,38 L760,10 L860,36 L960,20 L1060,40 L1200,15 L1200,60 L0,60 Z" fill="#2FB6A8"/>
+  </svg>
+  <div class="wavy-footer-inner">
+    <nav class="footer-sitemap">
+      <a href="index.html">首頁</a>
+      <a href="attractions.html">景點列表</a>
+      <a href="itineraries.html">完整遊程</a>
+      <a href="groups.html">揪團</a>
+      <a href="about.html">關於我們</a>
+      <a href="member-login.html">會員登入</a>
+      <a href="member-register.html">會員註冊</a>
+      <a href="admin.html">管理後台</a>
+    </nav>
+    <div class="wavy-footer-deco">🏔️ 🌲 ☁️ 🌲 🏔️</div>
+    <p>AI輔助全端程式設計與專案實作班 — 專題實作：AI 輔助部落文化旅遊推薦平台（走部落 TribeWalk）</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/api.js"></script>
+<script src="js/member-nav.js"></script>
+<script src="js/admin-auth.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/admin-itineraries.js"></script>
+<script src="js/admin-groups.js"></script>
+</body>
+</html>
