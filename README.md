@@ -13,7 +13,8 @@
 ## 使用技術
 - 前端：HTML5、CSS3、原生 JavaScript（Fetch API）、Chart.js
 - 後端：PHP（PDO）
-- 資料庫：SQLite（本機開發用，可自行換成 MySQL）
+- 資料庫：目前預設連線 MySQL（資料庫名稱 `tribewalk_1`），SQLite 是可一鍵切換的備用模式
+  （改 `backend/config/db.php` 裡的 `$USE_MYSQL` 開關即可）
 - 版本控制：Git / GitHub
 
 ## 系統功能說明
@@ -40,7 +41,10 @@
 
 ## 資料庫設計說明
 
-本專題使用 SQLite，資料庫檔案為 `database/travel.sqlite`。詳細建表語法見 [`database/schema.sql`](./database/schema.sql)。
+本專題目前預設連線 **MySQL**（資料庫名稱 `tribewalk_1`），建表語法見 [`database/schema-mysql.sql`](./database/schema-mysql.sql)。
+`backend/config/db.php` 最上面的 `$USE_MYSQL = true` 是連線模式開關；改成 `false` 會切回本機 **SQLite**
+（單一檔案 `database/travel.sqlite`，開箱即用免裝 MySQL），對應語法見 [`database/schema.sql`](./database/schema.sql)。
+兩份檔案的資料表結構完全對應，只有型別寫法依資料庫語法略有不同；下表以 SQLite 的型別命名為主（較簡潔好讀）。
 
 ### categories 族群分類資料表
 | 欄位 | 型別 | 說明 |

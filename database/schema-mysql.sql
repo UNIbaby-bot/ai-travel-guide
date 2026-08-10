@@ -1,13 +1,13 @@
 -- ============================================================
--- 走部落 TribeWalk — MySQL 版資料庫結構（給 phpMyAdmin 用）
+-- 走部落 TribeWalk — MySQL 版資料庫結構
 --
--- ⚠️ 這個檔案不是專題要交的版本！專題本身用的是 database/schema.sql（SQLite），
--- 網站程式碼（backend/）預設連的也是 SQLite，改用這份 MySQL 版不會影響網站運作。
--- 這份檔案純粹是讓你可以另外開一個 MySQL 資料庫，匯入同樣的表格結構跟種子資料，
--- 這樣就能用「真正的」phpMyAdmin 直接瀏覽/新增/刪除資料練習。
+-- 這是網站目前實際連線使用的資料庫版本！`backend/config/db.php` 裡的
+-- `$USE_MYSQL = true` 預設連的就是這份結構建出來的 MySQL 資料庫（`tribewalk_1`）。
+-- 如果想切回 SQLite（開箱即用免裝 MySQL），把 `$USE_MYSQL` 改成 `false` 即可，
+-- 那個模式對應的是 database/schema.sql，兩份檔案的資料表結構完全對應。
 --
--- 使用方式：
--- 1. 打開 phpMyAdmin，建立一個新的資料庫，例如取名 tribewalk_1，
+-- 使用方式（第一次建立資料庫、或想重灌乾淨資料時）：
+-- 1. 打開 phpMyAdmin，建立一個新的資料庫，取名 tribewalk_1，
 --    字元集選 utf8mb4_unicode_ci（中文才不會變亂碼）
 -- 2. 點選這個新資料庫 → 上方「匯入」分頁 → 選擇這個檔案 → 執行
 -- 3. 匯入完成後，左側就會看到 categories、attractions、itineraries 等表格，

@@ -7,7 +7,8 @@
 - （選用）**Git**：版本控制用
 
 最簡單的方式：安裝 **XAMPP** 或 **Laragon**（Windows）／**MAMP**（Mac），
-裡面已內建 PHP，不需要另外裝 MySQL（本專案預設用 SQLite，開箱即用）。
+裡面會內建 PHP 跟 MySQL，本專案目前預設連線 MySQL（見下方第 5 步）；
+如果不想裝 MySQL，把 `backend/config/db.php` 的 `$USE_MYSQL` 改成 `false` 即可改用 SQLite，開箱即用免額外設定。
 
 檢查是否已安裝 PHP，在終端機（命令提示字元）輸入：
 ```bash
@@ -100,9 +101,9 @@ $pass   = '';                     // XAMPP 預設密碼是空的，如果你的 
 `root` / `root`，連接埠是 `8889`），照著改成一樣的就好。改完存檔、重新整理網站，
 之後在 phpMyAdmin 改的資料就會直接反映在網站上，管理後台新增/修改/刪除的資料也會直接寫回 MySQL。
 
-> ⚠️ **重要取捨提醒**：
-> 如果要馬上就能打開(不用MYSQL)要把 `$USE_MYSQL` 改回 `false`（就會自動切回本機的
-> `database/travel.sqlite`，不需要任何額外設定），或至少在交專題前這樣切一次確認整個網站還能正常動。
+
+> 你想「開箱即用」，把 `$USE_MYSQL` 改回 `false`（就會自動切回本機的
+> `database/travel.sqlite`，不需要任何額外設定）。
 
 ## 6. Git / GitHub
 ```bash
