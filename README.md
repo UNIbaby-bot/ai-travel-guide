@@ -472,6 +472,7 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 | `detail.png` | 景點詳細內容畫面 |
 | `itineraries.png` | 完整遊程列表畫面 |
 | `groups.png` | 揪團列表畫面 |
+| `companion-rating.png` | 行程結束後的旅伴互評畫面 |
 | `admin.png` | 管理後台新增／修改／刪除畫面 |
 | `charts.png` | 管理後台統計圖表畫面 |
 | `rwd-1200.png` | 桌機寬度 1200px 檢查 |
@@ -492,6 +493,11 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 
 #### 揪團列表
 ![揪團列表畫面](docs/screenshots/groups.png)
+
+#### 旅伴互評
+行程結束後，同團已核准的成員可針對準時可靠、溝通互動、尊重與禮貌及整體體驗進行評分，並留下文字評語。
+
+![旅伴互評畫面](docs/screenshots/companion-rating.png)
 
 #### 管理後台
 ![管理後台畫面](docs/screenshots/admin.png)
@@ -585,6 +591,7 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 | 2026-08-10 | 表單欄位檢查 | 必填驗證、防呆與錯誤提示 | 新增部落景點時不填寫景點名稱、城市、分類直接送出 | 通過，系統顯示對應錯誤訊息並阻止送出，可避免不完整資料進入資料庫 | [查看截圖](docs/screenshots/tests/test-4-form-validation.png) |
 | 2026-08-10 | 統計圖表 API | MySQL 分組統計與圖表資料來源 | 呼叫 `GET /backend/api/dashboard_statistics.php` | 通過，回傳 `success:true`，`data.byCity` 與 `data.byCategory` 的數量正確，代表後端能提供 Chart.js 所需的統計資料 | [查看截圖](docs/screenshots/tests/test-5-dashboard-api.png) |
 | 2026-08-10 | 揪團申請流程 | 會員申請、審核、資料更新與人數同步 | 以會員 Wendy 申請加入 Eunice 發起的「司馬庫斯輕旅行」，發起人核准後確認人數更新 | 通過，核准後名單顯示 Eunice、Wendy，人數從 1/4 更新為 2/4，進度條同步變成 50%，代表完整揪團流程能正常串接 | [內頁核准](docs/screenshots/tests/test-6a-group-detail.png) / [揪團顯示](docs/screenshots/tests/test-6b-group-list.png) |
+| 2026-08-11 | 旅伴互評流程 | 行程結束條件、互評對象、四面向評分與評語 | 將揪團狀態更新為「已完成」，再由同團已核准成員對旅伴 Wendy 填寫準時可靠、溝通互動、尊重與禮貌、整體體驗及留言 | 通過，行程結束後系統正確顯示 Wendy 的互評表單，四個評分面向與留言皆可填寫並送出，代表旅伴資格判斷與互評功能能正常運作 | [查看截圖](docs/screenshots/companion-rating.png) |
 
 > [!NOTE]
 > 測試通過代表「本次測試的情境」運作正常，不代表所有功能完全沒有問題。<br>
