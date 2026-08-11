@@ -535,7 +535,7 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 | 2026-08-10 | 族群篩選功能 | 於景點列表選擇分類「布農族」 | 通過，畫面正確只顯示布農族部落（武界、松林、地利、雙龍、巴庫拉斯部落等） | [查看截圖](docs/screenshots/tests/test-3-category-filter.png) |
 | 2026-08-10 | 表單欄位檢查 | 新增部落景點時不填寫景點名稱、城市、分類直接送出 | 通過，正確顯示「請輸入景點名稱」「請輸入城市或地區」「請選擇分類」錯誤訊息，且不會送出 | [查看截圖](docs/screenshots/tests/test-4-form-validation.png) |
 | 2026-08-10 | 統計圖表 API | 呼叫 `GET /backend/api/dashboard_statistics.php` | 通過，回傳 `success:true`，`data.byCity` 各城市景點數量、`data.byCategory` 各族群景點數量都正確 | [查看截圖](docs/screenshots/tests/test-5-dashboard-api.png) |
-| 2026-08-10 | 揪團申請流程 | 以會員 Wendy 申請加入 Eunice 發起的「司馬庫斯輕旅行」，發起人核准後確認人數更新 | 通過，核准後「已核准成員」名單正確顯示 Eunice、Wendy，人數從 1/4 變成 2/4，進度條同步更新為 50% | [申請前](docs/screenshots/tests/test-6a-group-detail.png) / [核准後](docs/screenshots/tests/test-6b-group-list.png) |
+| 2026-08-10 | 揪團申請流程 | 以會員 Wendy 申請加入 Eunice 發起的「司馬庫斯輕旅行」，發起人核准後確認人數更新 | 通過，核准後「已核准成員」名單正確顯示 Eunice、Wendy，人數從 1/4 變成 2/4，進度條同步更新為 50% | [內頁核准](docs/screenshots/tests/test-6a-group-detail.png) / [揪團顯示](docs/screenshots/tests/test-6b-group-list.png) |
 
 ## 👩‍💻 開發者資訊
 | 項目 | 內容 |
