@@ -45,18 +45,19 @@
 > [!IMPORTANT]
 > 部分部落封面使用 AI 生成的氛圍示意圖，並非部落真實實景。
 
-## 🧰 使用技術
+## 🧰 使用技術與開發工具
 
-| 分層 | 技術 | 專案用途 |
+| 分層 | 技術／工具 | 專案用途 |
 |---|---|---|
-| 前端 | HTML5、CSS3 | 建立網頁內容、頁面結構與自訂視覺樣式 |
-| 響應式設計 | Flexbox、CSS Grid、Media Query | 製作版面排列、卡片布局及適應不同螢幕尺寸的 RWD 響應式頁面 |
-| 前端互動 | 原生 JavaScript | 處理事件監聽、DOM 操作、搜尋、篩選、排序、分頁及畫面更新 |
-| 資料串接 | Fetch API、JSON | 呼叫 PHP API、接收 JSON 資料並動態更新前端畫面 |
-| 後端 | PHP、PDO | 接收請求、驗證資料並操作資料庫 |
-| 資料庫 | MySQL／SQLite | 儲存景點、會員、評論、遊程與揪團資料 |
-| 資料視覺化 | Chart.js | 將後端統計資料製作成管理後台圖表，呈現各城市與各族群的景點數量 |
-| 設計與協作 | Figma、Git、GitHub | UI 規劃、版本控制與專案紀錄 |
+| 前端 | HTML5、CSS3 | 建立頁面結構與自訂視覺樣式 |
+| 響應式設計 | Flexbox、CSS Grid、Media Query | 製作版面排列、卡片布局及 RWD 響應式頁面 |
+| 前端互動 | 原生 JavaScript | 處理事件監聽、DOM 操作、搜尋、篩選、排序、分頁與畫面更新 |
+| 資料串接 | Fetch API、JSON | 呼叫 PHP API、接收資料並動態更新畫面 |
+| 後端 | 原生 PHP、PDO | 接收與驗證請求，透過預備陳述句操作資料庫 |
+| 資料庫 | MySQL（預設）、SQLite（可切換） | 儲存景點、會員、評論、遊程、揪團及旅伴互評資料 |
+| 資料視覺化 | Chart.js | 呈現各城市與各族群的景點數量統計 |
+| 開發環境 | VS Code、XAMPP、Apache、phpMyAdmin | 撰寫程式、執行 PHP 網站及管理 MySQL 資料庫 |
+| 設計與版本控制 | Figma、Git、GitHub | UI 規劃、版本控制與專案紀錄 |
 
 > 目前預設連線 **MySQL**，資料庫名稱為 `tribewalk_1`；SQLite 為可一鍵切換的備用模式。<br>
 > 只需修改 `backend/config/db.php` 中的 `$USE_MYSQL` 開關，其他 API 不必逐支重寫。
