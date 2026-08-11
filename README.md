@@ -8,7 +8,6 @@
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/zh-TW/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/zh-TW/docs/Web/CSS)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap_5-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=222)](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript)
 [![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)](https://www.chartjs.org/)
 [![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)](https://www.php.net/)
@@ -50,13 +49,13 @@
 
 | 分層 | 技術 | 專案用途 |
 |---|---|---|
-| 前端 | HTML5、CSS3 | 建立頁面結構與自訂視覺樣式 |
-| 前端框架 | Bootstrap 5 | 製作 RWD 響應式版面、網格排列及按鈕、卡片、導覽列等介面元件 |
-| 前端互動 | 原生 JavaScript | 處理事件監聽、DOM 操作、資料請求與畫面更新，未使用 Vue、React 或 jQuery |
-| 資料串接 | Fetch API、JSON | 前端呼叫 PHP API 並更新畫面 |
-| 後端 | PHP、PDO | 接收請求、驗證資料及操作資料庫 |
+| 前端 | HTML5、CSS3 | 建立網頁內容、頁面結構與自訂視覺樣式 |
+| 響應式設計 | Flexbox、CSS Grid、Media Query | 製作版面排列、卡片布局及適應不同螢幕尺寸的 RWD 響應式頁面 |
+| 前端互動 | 原生 JavaScript | 處理事件監聽、DOM 操作、搜尋、篩選、排序、分頁及畫面更新，未使用 Vue、React 或 jQuery |
+| 資料串接 | Fetch API、JSON | 呼叫 PHP API、接收 JSON 資料並動態更新前端畫面 |
+| 後端 | PHP、PDO | 接收請求、驗證資料並操作資料庫 |
 | 資料庫 | MySQL／SQLite | 儲存景點、會員、評論、遊程與揪團資料 |
-| 資料視覺化 | Chart.js | 將後端統計資料製作成管理後台的圖表，呈現各城市與各族群的景點數量 |
+| 資料視覺化 | Chart.js | 將後端統計資料製作成管理後台圖表，呈現各城市與各族群的景點數量 |
 | 設計與協作 | Figma、Git、GitHub | UI 規劃、版本控制與專案紀錄 |
 
 > 目前預設連線 **MySQL**，資料庫名稱為 `tribewalk_1`；SQLite 為可一鍵切換的備用模式。<br>
