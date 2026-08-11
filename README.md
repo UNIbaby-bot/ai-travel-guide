@@ -59,7 +59,8 @@
 | 資料視覺化 | Chart.js | 將後端統計資料製作成管理後台的圖表，呈現各城市與各族群的景點數量 |
 | 設計與協作 | Figma、Git、GitHub | UI 規劃、版本控制與專案紀錄 |
 
-> 目前預設連線 **MySQL**，資料庫名稱為 `tribewalk_1`；SQLite 為可一鍵切換的備用模式。只需修改 `backend/config/db.php` 中的 `$USE_MYSQL` 開關，其他 API 不必逐支重寫。
+> 目前預設連線 **MySQL**，資料庫名稱為 `tribewalk_1`；SQLite 為可一鍵切換的備用模式。<br>
+> 只需修改 `backend/config/db.php` 中的 `$USE_MYSQL` 開關，其他 API 不必逐支重寫。
 
 ## 🔄 系統架構
 
@@ -87,14 +88,18 @@ JavaScript 更新網頁內容
 | 景點詳細頁 | 顯示部落完整資訊，並可即時產生 AI 一日遊建議 |
 | 完整遊程 | 瀏覽多天部落輕旅行的完整路線規劃，可依區域篩選、搜尋 |
 | 遊程詳細頁 | 依「第X天」自動拆解路線文字，逐日呈現行程內容 |
-| 管理後台 | 需登入才能使用；新增／編輯／刪除部落景點與完整遊程（含欄位檢查與操作回饋）、統計圖表、修改密碼 |
+| 管理後台 | 需登入才能使用；新增／編輯／刪除部落景點<br>
+與完整遊程（含欄位檢查與操作回饋）、統計圖表、修改密碼 |
 | 會員系統 | 一般訪客可註冊、登入，跟管理後台的管理員帳號是分開的系統 |
-| 景點評論 | 會員可對部落景點留下 5 個面向的星級評分（景觀環境／文化真實性／交通可及性／性價比／整體推薦）+ 文字 + 照片／影片連結 |
+| 景點評論 | 會員可對部落景點留下 5 個面向的星級評分<br>
+（景觀環境／文化真實性／交通可及性／性價比／整體推薦）+ 文字 + 照片／影片連結 |
 | 揪團 | 會員可發起部落輕旅行揪團、開放其他會員申請加入，發起人可核准／拒絕申請 |
 | 旅伴互評 | 揪團出發日期過後，已核准的旅伴之間可互相評價（準時可靠／溝通互動／尊重禮貌／整體體驗） |
 | 揪團聯繫方式 | 發起人可留下 Discord／Line 等聯繫方式，只有發起人與已核准成員看得到 |
-| 揪團留言板 | 開放給所有登入會員留言討論（不限已核准成員），支援針對特定留言個別回覆，發起人的回覆會標示「🌿 團主」；讓還沒申請或申請中的人也能先跟發起人互動，真正的聯繫方式仍只有已核准成員看得到 |
-| 申請加入需自我介紹 | 申請加入揪團時須填寫自我介紹、加入原因與對行程的想法，供發起人審核判斷；發起人可設定審核截止日，讓申請者知道大概何時會有結果 |
+| 揪團留言板 | 開放給所有登入會員留言討論（不限已核准成員），支援針對特定留言個別回覆，發起人的回覆會<br>
+標示「🌿 團主」；讓還沒申請或申請中的人也能先跟發起人互動，真正的聯繫方式仍只有已核准成員看得到 |
+| 申請加入需自我介紹 | 申請加入揪團時須填寫自我介紹、加入原因與對行程的想法，供發起人審核判斷；<br>
+發起人可設定審核截止日，讓申請者知道大概何時會有結果 |
 
 > [!NOTE]
 > 會員、評論、揪團與旅伴互評屬於評量項目之外的延伸功能，用來練習更完整的全端應用情境。
@@ -286,17 +291,22 @@ JavaScript 更新網頁內容
 | `companion_ratings.rater_id` | `members.id` | 記錄哪位會員進行評分 |
 | `companion_ratings.ratee_id` | `members.id` | 記錄哪位會員接受評分 |
 
-> 主鍵（Primary Key）用來唯一識別資料表中的每一筆資料；
-> 外鍵（Foreign Key）用來參照另一張資料表的主鍵並建立關聯。
-> 主鍵代表「我是誰」，外鍵代表「我和誰有關係」。
+> 主鍵（Primary Key）用來唯一識別資料表中的每一筆資料；<br>
+> 外鍵（Foreign Key）用來參照另一張資料表的主鍵並建立關聯。<br>
+> 主鍵代表「我是誰」，外鍵代表「我和誰有關係」。<br>
 
 ## 🔌 API 說明
 
-API 成功時會回傳 `success: true`、`message` 與 `data`（資料內容）；失敗時會回傳 `success: false`、`message`（錯誤原因），並搭配對應的 HTTP 狀態碼（例如 401 未登入、404 查無資料）。
+API 成功時會回傳 `success: true`、`message` 與 `data`（資料內容）；<br>
+失敗時會回傳 `success: false`、`message`（錯誤原因），<br>
+並搭配對應的 HTTP 狀態碼（例如 401 未登入、404 查無資料）。
 
 ### CRUD 與 HTTP Method
 
-CRUD 是 **Create、Read、Update、Delete** 的縮寫，代表系統管理資料時最基本的四種操作。它不只是「新增、查詢、修改、刪除」四個名稱，也說明資料在操作前後產生的變化。
+CRUD 是 **Create、Read、Update、Delete** 的縮寫，<br>
+代表系統管理資料時最基本的四種操作。<br>
+它不只是「新增、查詢、修改、刪除」四個名稱，
+也說明資料在操作前後產生的變化。
 
 | CRUD | 英文 | 中文 | 實際意義 | 常用 HTTP Method | 本專案例子 |
 |---|---|---|---|---|---|
@@ -305,7 +315,9 @@ CRUD 是 **Create、Read、Update、Delete** 的縮寫，代表系統管理資�
 | U | Update | 更新／修改 | 變更已經存在的資料內容或狀態 | `PUT` | 修改景點、將揪團申請更新為「已核准」 |
 | D | Delete | 刪除 | 移除一筆已經存在且不再需要的資料 | `DELETE` | 刪除景點、刪除揪團 |
 
-> 上表是本專案主要資料管理 API 的常見對應方式。HTTP Method 應依 API 的主要目的判斷，並非所有 `POST` 都屬於 Create；例如會員登入雖然使用 `POST`，主要目的仍是身分驗證，而不是新增資料。
+> 上表是本專案主要資料管理 API 的常見對應方式。<br>
+> HTTP Method 應依 API 的主要目的判斷，並非所有 `POST` 都屬於 Create；<br>
+> 例如會員登入雖然使用 `POST`，主要目的仍是身分驗證，而不是新增資料。
 
 | Method | 路徑 | 說明 |
 |---|---|---|
@@ -327,8 +339,9 @@ CRUD 是 **Create、Read、Update、Delete** 的縮寫，代表系統管理資�
 | GET | `/api/auth_check.php` | 檢查是否已登入 |
 | POST | `/api/auth_change_password.php` | 修改管理員密碼（需先登入） |
 
-> 景點與遊程的新增／修改／刪除（POST／PUT／DELETE）都需要先登入管理後台，
-> 未登入呼叫會收到 401「請先登入管理後台」。查詢（GET）不需要登入，一般訪客也能瀏覽。
+> 景點與遊程的新增／修改／刪除（POST／PUT／DELETE）都需要先登入管理後台，<br>
+> 未登入呼叫會收到 401「請先登入管理後台」。<br>
+> 查詢（GET）不需要登入，一般訪客也能瀏覽。
 
 ### 會員／評論／揪團 API（延伸功能）
 
@@ -353,21 +366,25 @@ CRUD 是 **Create、Read、Update、Delete** 的縮寫，代表系統管理資�
 | GET | `/api/trip_group_messages.php?trip_group_id=1` | 查詢揪團留言（需登入會員，不限已核准成員） |
 | POST | `/api/trip_group_messages.php` | 新增揪團留言（需登入會員，不限已核准成員） |
 
-若透過 Apache 搭配 `.htaccess`，也可以用乾淨路徑呼叫，例如
-`GET /api/attractions`、`POST /api/ai/travel-plan`、`GET /api/dashboard/statistics`。
+若透過 Apache 搭配 `.htaccess`，也可以用乾淨路徑呼叫，<br>
+例如`GET /api/attractions`、`POST /api/ai/travel-plan`、`GET /api/dashboard/statistics`。
 
 ## 🤖 AI 工具與使用紀錄
 
-依照下表說明實際使用的 AI 工具、用途與產出內容，完整 Prompt 內容見表格下方：
+依照下表說明實際使用的 AI 工具、用途與產出內容，<br>
+完整 Prompt 內容見表格下方：
 
 | 用途 | 使用工具 | Prompt（提示詞）重點 | 產出內容摘要 |
 |---|---|---|---|
 | 關於我們頁面文案（4 段故事） | Claude | 提供創辦初衷的原始想法（國旅衰退、台中旅展的靈感、受 Eatgether 啟發、想陪伴女性旅伴的原因），請 Claude 整理成網站可用的完整文案 | 已完成，見 `frontend/about.html` |
 | 首頁 Banner 標語與文案（3 組，隨輪播切換） | Claude | 根據「關於我們」的核心理念，請 Claude 濃縮成適合首頁第一眼閱讀的標題＋簡短文案 | 已完成，見 `frontend/js/home.js` 的 `HERO_SLIDES` |
-| 首頁 Banner 圖（共 3 張） | ChatGPT（DALL·E） | 「清晨雲海」「森林吊橋秘境」「黃昏部落聚落」三種情境，皆為森林系＋蒂芬妮綠風格，避免生成特定族群人物臉孔／祭典畫面 | 已完成，存放於 `frontend/images/hero/`，首頁輪播主視覺使用中；完整 Prompt 見下方 |
-| 網站 LOGO | ChatGPT（DALL·E） | 融合先前三個 LOGO 方向的提示詞（山徑、行走人物、織紋家屋），並額外指定「三位女性一起健行」，呼應網站鎖定的女性揪團旅伴受眾 | 已完成，存放於 `frontend/images/brand/logo.png`，用於全站導覽列與瀏覽器 favicon |
+| 首頁 Banner 圖（共 3 張） | ChatGPT（DALL·E） | 「清晨雲海」「森林吊橋秘境」「黃昏部落聚落」三種情境，皆為森林系＋蒂芬妮綠風格，避免生成特定族群人物臉孔／祭典畫面 | 已完成，存放於 `frontend/images/hero/`，<br>
+首頁輪播主視覺使用中；完整 Prompt 見下方 |
+| 網站 LOGO | ChatGPT（DALL·E） | 融合先前三個 LOGO 方向的提示詞（山徑、行走人物、織紋家屋），並額外指定「三位女性一起健行」，呼應網站鎖定的女性揪團旅伴受眾 | 已完成，存放於 `frontend/images/brand/logo.png`，<br>
+用於全站導覽列與瀏覽器 favicon |
 | 族群分類圖示（9 個族群） | ChatGPT（DALL·E） | 統一風格：扁平插畫風、圓形徽章外框、蒂芬妮綠＋暖金色調，各族群依織布／紋樣特色代入不同花紋描述 | 已完成，存放於 `frontend/images/categories/`（tayal.png、bunun.png…9 個族群各一張），用於景點卡片與篩選選單；完整 Prompt 見下方 |
-| 部落景點封面圖（5 張：紅香、神山、來吉、樂野、茶山） | ChatGPT（DALL·E） | 因找不到合法授權的真實照片，依各部落地理與人文特色（茶園、石板屋、山村、古道、瀑布）分別生成插畫風示意圖 | 已完成，存放於 `frontend/images/attractions/`；完整 Prompt 見下方 |
+| 部落景點封面圖（5 張：紅香、神山、來吉、樂野、茶山） | ChatGPT（DALL·E） | 因找不到合法授權的真實照片，依各部落地理與人文特色（茶園、石板屋、山村、古道、瀑布）分別生成插畫風示意圖 | 已完成，存放於 `frontend/images/attractions/`；<br>
+完整 Prompt 見下方 |
 
 ### 完整 Prompt 記錄
 
@@ -442,11 +459,11 @@ An illustrative landscape of a small waterfall flowing through a lush green vall
 ## 🎨 介面設計稿
 Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.figma.com/design/9yUnsb5AEjj10ai7paDQSe/27%E8%99%9Ficap_%E8%B5%B0%E9%83%A8%E8%90%BD%E7%B6%B2%E7%AB%99-UI-%E8%A8%AD%E8%A8%88%E7%A8%BF?node-id=1-4&t=Narfhv0SlwRStOS7-1)
 
-> **設計迭代說明**：這份 Figma 設計稿是專案前期的發想版本，色彩系統採用橄欖綠＋卡其色調。
-> 實際開發網站的過程中，經過多輪測試與調整，最終色彩系統改為蒂芬妮綠＋薄荷粉彩色塊
-> （詳見「使用技術」與網站實際畫面），並加入了輪播動畫、不規則色塊背景、族群圖示等
-> 設計稿階段還沒有的細節。這是正常的設計迭代過程：先有整體版面／頁面架構的探索，
-> 再依實際開發測試結果微調視覺風格，兩者的頁面架構（導覽列、卡片、篩選區、內容區塊）
+> **設計迭代說明**：這份 Figma 設計稿是專案前期的發想版本，色彩系統採用橄欖綠＋卡其色調。<br>
+> 實際開發網站的過程中，經過多輪測試與調整，最終色彩系統改為蒂芬妮綠＋薄荷粉彩色塊<br>
+> （詳見「使用技術」與網站實際畫面），並加入了輪播動畫、不規則色塊背景、族群圖示等<br>
+> 設計稿階段還沒有的細節。這是正常的設計迭代過程：先有整體版面／頁面架構的探索，<br>
+> 再依實際開發測試結果微調視覺風格，兩者的頁面架構（導覽列、卡片、篩選區、內容區塊）<br>
 > 是一致的，只有色彩與部分視覺細節在實作階段做了進一步優化。
 
 ## 📸 專案畫面預覽
@@ -504,7 +521,8 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 - 管理後台第一次啟動會自動建立預設帳號 `admin` / 密碼 `admin123`，
 - 密碼是用 PHP `password_hash()`（bcrypt）雜湊後才存進資料庫，資料庫裡看不到明碼密碼。
 - 這裡的登入機制是給「管理者自己用」的簡易保護，不是給一般網站訪客註冊的會員系統。
-- 會員（`members`）的密碼同樣是用 bcrypt 雜湊儲存；會員系統跟管理員系統是各自獨立的登入狀態，
+- 會員（`members`）的密碼同樣是用 bcrypt 雜湊儲存；<br>
+會員系統跟管理員系統是各自獨立的登入狀態，
   不會互相影響。
 - 評論的照片／影片目前是「貼網址」的形式。
 - 揪團申請被核准／拒絕時，目前只會反映在網站畫面上。
@@ -521,16 +539,17 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 
 原始資料是以「遊程」為單位（每個遊程包含多天、多個部落景點）。這批資料我拆成兩層使用：
 - 完整保留原始的 15 筆遊程，存入 `itineraries` 資料表（對應「完整遊程」頁面）
-- 從遊程路線裡拆解出個別部落名稱，整理成 39 筆獨立的部落景點，存入 `attractions` 資料表，
-  並額外補上族群分類與簡短介紹文字
+- 從遊程路線裡拆解出個別部落名稱，整理成 39 筆獨立的部落景點，<br>
+存入 `attractions` 資料表，並額外補上族群分類與簡短介紹文字
 
-另外新增了 5 筆部落（紅香部落、神山部落、來吉部落、樂野部落、茶山部落），
-是參考熊麻吉旅行社官網（https://www.bearmachi.com.tw/aboriginal-tribe/）行程頁面中提到的部落名稱，
-自行查詢族群與地區資訊後整理而成（不是直接引用該公司的行程文案內容）。
+另外新增了 5 筆部落（紅香部落、神山部落、來吉部落、樂野部落、茶山部落），<br>
+是參考熊麻吉旅行社官網（https://www.bearmachi.com.tw/aboriginal-tribe/）<br>
+行程頁面中提到的部落名稱，自行查詢族群與地區資訊後整理而成<br>
+（不是直接引用該公司的行程文案內容）。<br>
 目前共 44 筆部落景點、9 個族群分類。
 
 ## 📷 部落照片來源（Wikimedia Commons）
-以下部落已經換成 Wikimedia Commons 的真實照片，取代原本的灰色佔位圖：
+以下部落照片為 Wikimedia Commons 的真實照片：
 
 | 部落 | 圖片網址 | 授權／攝影者 |
 |---|---|---|
@@ -542,7 +561,8 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 - 司馬庫斯：[新竹縣尖石鄉 panoramio](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/%E5%8F%B0%E7%81%A3_%E2%80%A2_%E6%96%B0%E7%AB%B9%E7%B8%A3_%E5%B0%96%E7%9F%B3%E9%84%89_-_panoramio_%283%29.jpg/1920px-%E5%8F%B0%E7%81%A3_%E2%80%A2_%E6%96%B0%E7%AB%B9%E7%B8%A3_%E5%B0%96%E7%9F%B3%E9%84%89_-_panoramio_%283%29.jpg)
 
 ## 🖌️ 部落封面圖（AI 生成示意）
-以下 5 個部落因為找不到合法授權的真實照片，先用 ChatGPT（DALL·E）生成示意風景圖代替：
+以下 5 個部落因為找不到合法授權的真實照片，<br>
+先用 ChatGPT（DALL·E）生成示意風景圖代替：
 
 | 部落 | 圖片路徑 | 提示詞重點 |
 |---|---|---|
@@ -553,16 +573,17 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 | 茶山部落 | `frontend/images/attractions/chashan.jpg` | 溪流瀑布、山村景觀 |
 
 > [!WARNING]
-> 以上圖片皆為 AI 生成的氛圍示意圖，**不是部落真實樣貌、空拍或街景照片**。
-生成時已刻意避免出現特定族群人物臉孔與祭典畫面。
+> 以上圖片皆為 AI 生成的氛圍示意圖，**不是部落真實樣貌、空拍或街景照片**。<br>
+> 生成時已刻意避免出現特定族群人物臉孔與祭典畫面。
 
 ## ✅ 測試紀錄
 
-網站畫面能正常顯示，不代表後端、資料庫與操作流程都正確。因此本專題分別測試 PHP 語法、API、資料庫查詢、表單防呆與完整操作流程，確認各層功能能夠正常串接。
+網站畫面能正常顯示，不代表後端、資料庫與操作流程都正確。<br>
+因此本專題分別測試 PHP 語法、API、資料庫查詢、表單防呆與完整操作流程，確認各層功能能夠正常串接。
 
 | 日期 | 測試項目 | 主要驗證內容 | 測試方法 | 結果 | 截圖佐證 |
 |---|---|---|---|---|---|
-| 2026-08-10 | PHP 程式語法檢查（attractions.php、trip_groups.php、db.php） | PHP 程式能否被正確解析 | 分別執行 `php -l backend/api/attractions.php`、`php -l backend/api/trip_groups.php`、`php -l backend/config/db.php` | 通過，三個檔案都顯示 `No syntax errors detected`，代表沒有偵測到基本語法錯誤 | [查看截圖](docs/screenshots/tests/test-1-php-lint.png) |
+| 2026-08-10 | PHP 程式語法檢查（attractions.php、trip_groups.php、db.php） | PHP 程式能否被正確解析 | 分別執行 `php -l backend/api/attractions.php`、<br>`php -l backend/api/trip_groups.php`、<br>`php -l backend/config/db.php` | 通過，三個檔案都顯示 `No syntax errors detected`，代表沒有偵測到基本語法錯誤 | [查看截圖](docs/screenshots/tests/test-1-php-lint.png) |
 | 2026-08-10 | 景點列表 API | PHP、MySQL、JSON 回傳與分頁 | 呼叫 `GET /backend/api/attractions.php?page=1&limit=6` | 通過，回傳 `success:true`、6 筆景點資料、總數 45 筆及總頁數 8 頁，代表資料查詢與分頁計算正常 | [查看截圖](docs/screenshots/tests/test-2-attractions-api.png) |
 | 2026-08-10 | 族群篩選功能 | 前端操作、分類查詢與畫面更新 | 於景點列表選擇分類「布農族」 | 通過，畫面只顯示布農族部落（武界、松林、地利、雙龍、巴庫拉斯部落等），代表分類條件與景點資料能正確對應 | [查看截圖](docs/screenshots/tests/test-3-category-filter.png) |
 | 2026-08-10 | 表單欄位檢查 | 必填驗證、防呆與錯誤提示 | 新增部落景點時不填寫景點名稱、城市、分類直接送出 | 通過，系統顯示對應錯誤訊息並阻止送出，可避免不完整資料進入資料庫 | [查看截圖](docs/screenshots/tests/test-4-form-validation.png) |
