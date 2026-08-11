@@ -225,9 +225,53 @@ JavaScript 更新網頁內容
 
 限制：只有同團「已核准」的成員、且出發日期已過，才能互相評價。
 
-### 資料表關聯
-`attractions.category_id` 外鍵對應 `categories.id`，代表每個部落景點都屬於一個族群分類；
-其餘會員／評論／揪團相關資料表的外鍵關聯已標示於上方各表說明中。
+### 資料表關聯總覽
+
+> 以下從主資料表的主鍵（PK）出發，呈現整體資料庫架構與一對多關係。
+
+| 主資料表主鍵（PK） | 子資料表外鍵（FK） | 關聯類型 | 架構說明 |
+|---|---|---|---|
+| `categories.id` | `attractions.category_id` | 一對多 | 一個族群分類可包含多個部落景點 |
+| `members.id` | `reviews.member_id` | 一對多 | 一位會員可發表多則景點評論 |
+| `attractions.id` | `reviews.attraction_id` | 一對多 | 一個景點可擁有多則評論 |
+| `reviews.id` | `review_media.review_id` | 一對多 | 一則評論可附加多張照片或多部影片 |
+| `members.id` | `trip_groups.organizer_id` | 一對多 | 一位會員可發起多個揪團 |
+| `attractions.id` | `trip_groups.attraction_id` | 一對多 | 一個景點可建立多個揪團 |
+| `itineraries.id` | `trip_groups.itinerary_id` | 一對多 | 一個完整遊程可建立多個揪團 |
+| `trip_groups.id` | `trip_group_messages.trip_group_id` | 一對多 | 一個揪團可擁有多則留言 |
+| `members.id` | `trip_group_messages.member_id` | 一對多 | 一位會員可在揪團中發布多則留言 |
+| `trip_group_messages.id` | `trip_group_messages.reply_to_id` | 一對多（自我關聯） | 一則留言可被其他留言回覆 |
+| `trip_groups.id` | `trip_group_members.trip_group_id` | 一對多 | 一個揪團可包含多筆成員申請或加入紀錄 |
+| `members.id` | `trip_group_members.member_id` | 一對多 | 一位會員可申請或加入多個揪團 |
+| `trip_groups.id` | `companion_ratings.trip_group_id` | 一對多 | 一個揪團可產生多筆旅伴互評 |
+| `members.id` | `companion_ratings.rater_id` | 一對多 | 一位會員可對多位旅伴進行評分 |
+| `members.id` | `companion_ratings.ratee_id` | 一對多 | 一位會員可收到多筆旅伴評分 |
+
+### 外鍵欄位明細
+
+> 以下從子資料表的外鍵（FK）出發，說明各欄位參照的主鍵（PK）及實際用途。
+
+| 子資料表外鍵（FK） | 參照的主鍵（PK） | 欄位用途 |
+|---|---|---|
+| `attractions.category_id` | `categories.id` | 記錄該部落景點所屬的族群分類 |
+| `reviews.member_id` | `members.id` | 記錄這則評論由哪位會員發表 |
+| `reviews.attraction_id` | `attractions.id` | 記錄這則評論屬於哪個景點 |
+| `review_media.review_id` | `reviews.id` | 記錄照片或影片附加在哪一則評論 |
+| `trip_groups.organizer_id` | `members.id` | 記錄該揪團由哪位會員發起 |
+| `trip_groups.attraction_id` | `attractions.id` | 記錄揪團預計前往的景點，可為空值 |
+| `trip_groups.itinerary_id` | `itineraries.id` | 記錄揪團採用的完整遊程，可為空值 |
+| `trip_group_messages.trip_group_id` | `trip_groups.id` | 記錄這則留言屬於哪個揪團 |
+| `trip_group_messages.member_id` | `members.id` | 記錄這則留言由哪位會員發布 |
+| `trip_group_messages.reply_to_id` | `trip_group_messages.id` | 記錄這則留言回覆哪一則留言；未回覆時可為空值 |
+| `trip_group_members.trip_group_id` | `trip_groups.id` | 記錄會員申請或加入哪個揪團 |
+| `trip_group_members.member_id` | `members.id` | 記錄提出申請或加入揪團的會員 |
+| `companion_ratings.trip_group_id` | `trip_groups.id` | 記錄旅伴評價來自哪一次揪團 |
+| `companion_ratings.rater_id` | `members.id` | 記錄哪位會員進行評分 |
+| `companion_ratings.ratee_id` | `members.id` | 記錄哪位會員接受評分 |
+
+> 主鍵（Primary Key）用來唯一識別資料表中的每一筆資料；
+> 外鍵（Foreign Key）用來參照另一張資料表的主鍵並建立關聯。
+> 主鍵代表「我是誰」，外鍵代表「我和誰有關係」。
 
 ## 🔌 API 說明
 
