@@ -51,7 +51,7 @@
 |---|---|---|
 | 前端 | HTML5、CSS3 | 建立網頁內容、頁面結構與自訂視覺樣式 |
 | 響應式設計 | Flexbox、CSS Grid、Media Query | 製作版面排列、卡片布局及適應不同螢幕尺寸的 RWD 響應式頁面 |
-| 前端互動 | 原生 JavaScript | 處理事件監聽、DOM 操作、搜尋、篩選、排序、分頁及畫面更新，未使用 Vue、React 或 jQuery |
+| 前端互動 | 原生 JavaScript | 處理事件監聽、DOM 操作、搜尋、篩選、排序、分頁及畫面更新 |
 | 資料串接 | Fetch API、JSON | 呼叫 PHP API、接收 JSON 資料並動態更新前端畫面 |
 | 後端 | PHP、PDO | 接收請求、驗證資料並操作資料庫 |
 | 資料庫 | MySQL／SQLite | 儲存景點、會員、評論、遊程與揪團資料 |
