@@ -40,7 +40,7 @@
 | 依城市、族群與關鍵字探索部落 | 景點詳情、完整遊程及一日遊建議 | 發起揪團、申請審核、留言與互評 | PHP API、MySQL、CRUD、驗證與圖表 |
 
 > [!IMPORTANT]
-> 部分部落封面使用 AI 生成的氛圍示意圖，並非部落真實實景。文化內容正式發布前，仍應由部落族人或熟悉該文化的資料來源協助審閱。
+> 部分部落封面使用 AI 生成的氛圍示意圖，並非部落真實實景。
 
 ## 🧰 使用技術
 
@@ -349,11 +349,6 @@ An illustrative landscape of a forest trail through tall cedar trees leading tow
 An illustrative landscape of a small waterfall flowing through a lush green valley near a quiet mountain village, mossy rocks, fresh atmosphere, digital painting style, no people, no text, 16:9
 ```
 中文對照：一幅描繪寧靜山村附近溪流瀑布的插畫風景，小型瀑布流經翠綠茂盛的山谷，周圍散布著覆滿青苔的岩石，呈現清新自然的氛圍。數位繪畫風格，無人物、無文字，16:9 橫向構圖。
-
-**使用 AI 產出部落文化內容時的提醒**（建議直接寫進成果簡報，展現負責任的 AI 使用態度）：
-- AI 生成的文字草稿僅作為初稿，正式內容應請部落族人或熟悉該文化的資料來源協助審閱、修正。
-- 避免把部落文化包裝成獵奇或新奇的「商品」，優先呈現正確資訊。
-- 網站應優先連結部落自營或合法旅行社的官方資訊，並提醒旅客尊重部落的參觀規範（例如須事前預約、禁止進入的區域、拍照規定等）。
 
 ## 🎨 介面設計稿
 Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.figma.com/design/9yUnsb5AEjj10ai7paDQSe/27%E8%99%9Ficap_%E8%B5%B0%E9%83%A8%E8%90%BD%E7%B6%B2%E7%AB%99-UI-%E8%A8%AD%E8%A8%88%E7%A8%BF?node-id=1-4&t=Narfhv0SlwRStOS7-1)
