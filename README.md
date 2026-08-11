@@ -378,13 +378,10 @@ CRUD 是 **Create、Read、Update、Delete** 的縮寫，<br>
 |---|---|---|---|
 | 關於我們頁面文案（4 段故事） | Claude | 提供創辦初衷的原始想法（國旅衰退、台中旅展的靈感、受 Eatgether 啟發、想陪伴女性旅伴的原因），請 Claude 整理成網站可用的完整文案 | 已完成，見 `frontend/about.html` |
 | 首頁 Banner 標語與文案（3 組，隨輪播切換） | Claude | 根據「關於我們」的核心理念，請 Claude 濃縮成適合首頁第一眼閱讀的標題＋簡短文案 | 已完成，見 `frontend/js/home.js` 的 `HERO_SLIDES` |
-| 首頁 Banner 圖（共 3 張） | ChatGPT（DALL·E） | 「清晨雲海」「森林吊橋秘境」「黃昏部落聚落」三種情境，皆為森林系＋蒂芬妮綠風格，避免生成特定族群人物臉孔／祭典畫面 | 已完成，存放於 `frontend/images/hero/`，<br>
-首頁輪播主視覺使用中；完整 Prompt 見下方 |
-| 網站 LOGO | ChatGPT（DALL·E） | 融合先前三個 LOGO 方向的提示詞（山徑、行走人物、織紋家屋），並額外指定「三位女性一起健行」，呼應網站鎖定的女性揪團旅伴受眾 | 已完成，存放於 `frontend/images/brand/logo.png`，<br>
-用於全站導覽列與瀏覽器 favicon |
+| 首頁 Banner 圖（共 3 張） | ChatGPT（DALL·E） | 「清晨雲海」「森林吊橋秘境」「黃昏部落聚落」三種情境，皆為森林系＋蒂芬妮綠風格，避免生成特定族群人物臉孔／祭典畫面 | 已完成，存放於 `frontend/images/hero/`，首頁輪播主視覺使用中；完整 Prompt 見下方 |
+| 網站 LOGO | ChatGPT（DALL·E） | 融合先前三個 LOGO 方向的提示詞（山徑、行走人物、織紋家屋），並額外指定「三位女性一起健行」，呼應網站鎖定的女性揪團旅伴受眾 | 已完成，存放於 `frontend/images/brand/logo.png`，用於全站導覽列與瀏覽器 favicon |
 | 族群分類圖示（9 個族群） | ChatGPT（DALL·E） | 統一風格：扁平插畫風、圓形徽章外框、蒂芬妮綠＋暖金色調，各族群依織布／紋樣特色代入不同花紋描述 | 已完成，存放於 `frontend/images/categories/`（tayal.png、bunun.png…9 個族群各一張），用於景點卡片與篩選選單；完整 Prompt 見下方 |
-| 部落景點封面圖（5 張：紅香、神山、來吉、樂野、茶山） | ChatGPT（DALL·E） | 因找不到合法授權的真實照片，依各部落地理與人文特色（茶園、石板屋、山村、古道、瀑布）分別生成插畫風示意圖 | 已完成，存放於 `frontend/images/attractions/`；<br>
-完整 Prompt 見下方 |
+| 部落景點封面圖（5 張：紅香、神山、來吉、樂野、茶山） | ChatGPT（DALL·E） | 因找不到合法授權的真實照片，依各部落地理與人文特色（茶園、石板屋、山村、古道、瀑布）分別生成插畫風示意圖 | 已完成，存放於 `frontend/images/attractions/`；完整 Prompt 見下方 |
 
 ### 完整 Prompt 記錄
 
