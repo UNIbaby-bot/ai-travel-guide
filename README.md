@@ -8,7 +8,9 @@
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/zh-TW/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/zh-TW/docs/Web/CSS)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap_5-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=222)](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript)
+[![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)](https://www.chartjs.org/)
 [![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)](https://www.php.net/)
 [![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)](https://www.figma.com/)
@@ -46,11 +48,13 @@
 
 | 分層 | 技術 | 專案用途 |
 |---|---|---|
-| 前端 | HTML5、CSS3、原生 JavaScript | 頁面結構、RWD、互動效果與資料呈現 |
+| 前端 | HTML5、CSS3 | 建立頁面結構與自訂視覺樣式 |
+| 前端框架 | Bootstrap 5 | 製作 RWD 響應式版面、網格排列及按鈕、卡片、導覽列等介面元件 |
+| 前端互動 | 原生 JavaScript | 處理事件監聽、DOM 操作、資料請求與畫面更新，未使用 Vue、React 或 jQuery |
 | 資料串接 | Fetch API、JSON | 前端呼叫 PHP API 並更新畫面 |
 | 後端 | PHP、PDO | 接收請求、驗證資料及操作資料庫 |
 | 資料庫 | MySQL／SQLite | 儲存景點、會員、評論、遊程與揪團資料 |
-| 視覺化 | Chart.js | 呈現各城市與各族群的景點統計 |
+| 資料視覺化 | Chart.js | 將後端統計資料製作成管理後台的圖表，呈現各城市與各族群的景點數量 |
 | 設計與協作 | Figma、Git、GitHub | UI 規劃、版本控制與專案紀錄 |
 
 > 目前預設連線 **MySQL**，資料庫名稱為 `tribewalk_1`；SQLite 為可一鍵切換的備用模式。只需修改 `backend/config/db.php` 中的 `$USE_MYSQL` 開關，其他 API 不必逐支重寫。
@@ -276,6 +280,19 @@ JavaScript 更新網頁內容
 ## 🔌 API 說明
 
 API 成功時會回傳 `success: true`、`message` 與 `data`（資料內容）；失敗時會回傳 `success: false`、`message`（錯誤原因），並搭配對應的 HTTP 狀態碼（例如 401 未登入、404 查無資料）。
+
+### CRUD 與 HTTP Method
+
+CRUD 是 **Create、Read、Update、Delete** 的縮寫，代表系統管理資料時最基本的四種操作。它不只是「新增、查詢、修改、刪除」四個名稱，也說明資料在操作前後產生的變化。
+
+| CRUD | 英文 | 中文 | 實際意義 | 常用 HTTP Method | 本專案例子 |
+|---|---|---|---|---|---|
+| C | Create | 建立／新增 | 建立一筆原本不存在的新資料 | `POST` | 新增景點、發起揪團 |
+| R | Read | 讀取／查詢 | 取得既有資料，但不改變資料內容 | `GET` | 取得景點列表、查看揪團詳情 |
+| U | Update | 更新／修改 | 變更已經存在的資料內容或狀態 | `PUT` | 修改景點、將揪團申請更新為「已核准」 |
+| D | Delete | 刪除 | 移除一筆已經存在且不再需要的資料 | `DELETE` | 刪除景點、刪除揪團 |
+
+> 上表是本專案主要資料管理 API 的常見對應方式。HTTP Method 應依 API 的主要目的判斷，並非所有 `POST` 都屬於 Create；例如會員登入雖然使用 `POST`，主要目的仍是身分驗證，而不是新增資料。
 
 | Method | 路徑 | 說明 |
 |---|---|---|
@@ -528,14 +545,21 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 
 ## ✅ 測試紀錄
 
-| 日期 | 測試項目 | 測試方法 | 結果 | 截圖佐證 |
-|---|---|---|---|---|
-| 2026-08-10 | PHP 程式語法檢查（attractions.php、trip_groups.php、db.php） | 分別執行 `php -l backend/api/attractions.php`、`php -l backend/api/trip_groups.php`、`php -l backend/config/db.php` | 通過，三個檔案都顯示 `No syntax errors detected` | [查看截圖](docs/screenshots/tests/test-1-php-lint.png) |
-| 2026-08-10 | 景點列表 API | 呼叫 `GET /backend/api/attractions.php?page=1&limit=6` | 通過，回傳 `success:true`，`data.items` 6 筆景點資料，`total:45`、`totalPages:8` 分頁資訊正確 | [查看截圖](docs/screenshots/tests/test-2-attractions-api.png) |
-| 2026-08-10 | 族群篩選功能 | 於景點列表選擇分類「布農族」 | 通過，畫面正確只顯示布農族部落（武界、松林、地利、雙龍、巴庫拉斯部落等） | [查看截圖](docs/screenshots/tests/test-3-category-filter.png) |
-| 2026-08-10 | 表單欄位檢查 | 新增部落景點時不填寫景點名稱、城市、分類直接送出 | 通過，正確顯示「請輸入景點名稱」「請輸入城市或地區」「請選擇分類」錯誤訊息，且不會送出 | [查看截圖](docs/screenshots/tests/test-4-form-validation.png) |
-| 2026-08-10 | 統計圖表 API | 呼叫 `GET /backend/api/dashboard_statistics.php` | 通過，回傳 `success:true`，`data.byCity` 各城市景點數量、`data.byCategory` 各族群景點數量都正確 | [查看截圖](docs/screenshots/tests/test-5-dashboard-api.png) |
-| 2026-08-10 | 揪團申請流程 | 以會員 Wendy 申請加入 Eunice 發起的「司馬庫斯輕旅行」，發起人核准後確認人數更新 | 通過，核准後「已核准成員」名單正確顯示 Eunice、Wendy，人數從 1/4 變成 2/4，進度條同步更新為 50% | [內頁核准](docs/screenshots/tests/test-6a-group-detail.png) / [揪團顯示](docs/screenshots/tests/test-6b-group-list.png) |
+網站畫面能正常顯示，不代表後端、資料庫與操作流程都正確。因此本專題分別測試 PHP 語法、API、資料庫查詢、表單防呆與完整操作流程，確認各層功能能夠正常串接。
+
+| 日期 | 測試項目 | 主要驗證內容 | 測試方法 | 結果 | 截圖佐證 |
+|---|---|---|---|---|---|
+| 2026-08-10 | PHP 程式語法檢查（attractions.php、trip_groups.php、db.php） | PHP 程式能否被正確解析 | 分別執行 `php -l backend/api/attractions.php`、`php -l backend/api/trip_groups.php`、`php -l backend/config/db.php` | 通過，三個檔案都顯示 `No syntax errors detected`，代表沒有偵測到基本語法錯誤 | [查看截圖](docs/screenshots/tests/test-1-php-lint.png) |
+| 2026-08-10 | 景點列表 API | PHP、MySQL、JSON 回傳與分頁 | 呼叫 `GET /backend/api/attractions.php?page=1&limit=6` | 通過，回傳 `success:true`、6 筆景點資料、總數 45 筆及總頁數 8 頁，代表資料查詢與分頁計算正常 | [查看截圖](docs/screenshots/tests/test-2-attractions-api.png) |
+| 2026-08-10 | 族群篩選功能 | 前端操作、分類查詢與畫面更新 | 於景點列表選擇分類「布農族」 | 通過，畫面只顯示布農族部落（武界、松林、地利、雙龍、巴庫拉斯部落等），代表分類條件與景點資料能正確對應 | [查看截圖](docs/screenshots/tests/test-3-category-filter.png) |
+| 2026-08-10 | 表單欄位檢查 | 必填驗證、防呆與錯誤提示 | 新增部落景點時不填寫景點名稱、城市、分類直接送出 | 通過，系統顯示對應錯誤訊息並阻止送出，可避免不完整資料進入資料庫 | [查看截圖](docs/screenshots/tests/test-4-form-validation.png) |
+| 2026-08-10 | 統計圖表 API | MySQL 分組統計與圖表資料來源 | 呼叫 `GET /backend/api/dashboard_statistics.php` | 通過，回傳 `success:true`，`data.byCity` 與 `data.byCategory` 的數量正確，代表後端能提供 Chart.js 所需的統計資料 | [查看截圖](docs/screenshots/tests/test-5-dashboard-api.png) |
+| 2026-08-10 | 揪團申請流程 | 會員申請、審核、資料更新與人數同步 | 以會員 Wendy 申請加入 Eunice 發起的「司馬庫斯輕旅行」，發起人核准後確認人數更新 | 通過，核准後名單顯示 Eunice、Wendy，人數從 1/4 更新為 2/4，進度條同步變成 50%，代表完整揪團流程能正常串接 | [內頁核准](docs/screenshots/tests/test-6a-group-detail.png) / [揪團顯示](docs/screenshots/tests/test-6b-group-list.png) |
+
+> [!NOTE]
+> 測試通過代表「本次測試的情境」運作正常，不代表所有功能完全沒有問題。例如 `php -l` 只能確認 PHP 語法正確，不能證明資料庫連線與 API 回傳內容一定正確；因此仍需要搭配 API、畫面操作及完整流程測試。
+
+簡單來說，這些測試依序確認：**程式寫法合法 → 後端能查詢並回傳資料 → 使用者操作與防呆正常 → 跨頁面及資料表的完整流程可正常運作。**
 
 ## 👩‍💻 開發者資訊
 | 項目 | 內容 |
