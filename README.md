@@ -97,116 +97,131 @@ JavaScript 更新網頁內容
 
 ## 🗄️ 資料庫設計
 
-本專題目前預設連線 **MySQL**（資料庫名稱 `tribewalk_1`），建表語法見 [`database/schema-mysql.sql`](./database/schema-mysql.sql)。
-`backend/config/db.php` 最上面的 `$USE_MYSQL = true` 是連線模式開關；改成 `false` 會切回本機 **SQLite**
-（單一檔案 `database/travel.sqlite`，開箱即用免裝 MySQL），對應語法見 [`database/schema.sql`](./database/schema.sql)。
-兩份檔案的資料表結構完全對應，只有型別寫法依資料庫語法略有不同；下表以 SQLite 的型別命名為主（較簡潔好讀）。
+本專題目前使用 **MySQL**，資料庫名稱為 `tribewalk_1`，並透過 **XAMPP** 啟動 Apache 與 MySQL、使用 **phpMyAdmin** 管理資料表及資料內容。完整建表語法請參考 [`database/schema-mysql.sql`](./database/schema-mysql.sql)。
+
+後端 PHP 使用 **PDO** 連接 MySQL。各欄位會依資料內容選擇合適的 MySQL 資料型態：編號與數量使用 `INT`、長度有限的短文字使用 `VARCHAR`、較長的介紹或留言使用 `TEXT`，日期及時間則使用 `DATE` 或 `DATETIME`。
+
+> [!NOTE]
+> `backend/config/db.php` 中的 `$USE_MYSQL = true` 代表目前連接 MySQL；專案另保留 SQLite 作為備用模式，但以下資料庫設計均以目前在 phpMyAdmin 實際使用的 **MySQL 結構**為準。
 
 ### categories 族群分類資料表
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| id | INTEGER | 主鍵，自動編號 |
-| name | TEXT | 族群分類名稱（共 9 族：泰雅族、布農族、排灣族、鄒族、阿美族、賽德克族、太魯閣族、噶瑪蘭族、魯凱族） |
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| name | VARCHAR(100) | 族群分類名稱，不可重複（共 9 族） |
 
 ### attractions 部落／景點資料表
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| id | INTEGER | 主鍵，自動編號 |
-| name | TEXT | 部落／景點名稱 |
-| city | TEXT | 城市或地區 |
-| category_id | INTEGER | 分類編號，對應 `categories.id`（外鍵） |
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| name | VARCHAR(100) | 部落／景點名稱 |
+| city | VARCHAR(100) | 縣市或鄉鎮 |
+| category_id | INT | 族群分類編號，對應 `categories.id`（外鍵） |
 | image_url | TEXT | 圖片網址 |
 | description | TEXT | 部落介紹文字 |
-| created_at | TEXT | 建立時間 |
+| created_at | DATETIME | 建立日期與時間，預設為目前時間 |
 
 ### itineraries 完整遊程資料表
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| id | INTEGER | 主鍵，自動編號 |
-| name | TEXT | 遊程名稱 |
-| region | TEXT | 區域 |
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| name | VARCHAR(150) | 遊程名稱 |
+| region | VARCHAR(50) | 區域（北部／中部／南部／東部） |
 | route_text | TEXT | 完整路線文字（可能包含多天內容） |
-| created_at | TEXT | 建立時間 |
+| created_at | DATETIME | 建立日期與時間，預設為目前時間 |
 
 此資料表獨立於 `attractions` 之外，用來呈現「一個遊程串連多個部落景點」的完整規劃，資料整理自政府開放資料（見下方說明）。
 
 ### admins 後台管理員資料表
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| id | INTEGER | 主鍵，自動編號 |
-| username | TEXT | 管理員帳號 |
-| password_hash | TEXT | 密碼雜湊（bcrypt） |
-| created_at | TEXT | 建立時間 |
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| username | VARCHAR(100) | 管理員帳號，不可重複 |
+| password_hash | VARCHAR(255) | 密碼雜湊（bcrypt） |
+| created_at | DATETIME | 建立日期與時間，預設為目前時間 |
 
 只用來保護管理後台，不對外開放註冊。
 
 ### members 一般會員資料表
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| id | INTEGER | 主鍵，自動編號 |
-| username | TEXT | 會員帳號 |
-| email | TEXT | 電子郵件 |
-| password_hash | TEXT | 密碼雜湊（bcrypt） |
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| username | VARCHAR(100) | 會員帳號，不可重複 |
+| email | VARCHAR(255) | 電子郵件，不可重複 |
+| password_hash | VARCHAR(255) | 密碼雜湊（bcrypt） |
 | avatar_url | TEXT | 頭像網址 |
 | bio | TEXT | 自我介紹 |
-| email_verified | INTEGER | 是否已驗證信箱 |
-| created_at | TEXT | 建立時間 |
+| email_verified | TINYINT(1) | 信箱驗證狀態，`0` 代表未驗證、`1` 代表已驗證 |
+| created_at | DATETIME | 建立日期與時間，預設為目前時間 |
 
 跟 `admins` 是分開的帳號系統。
 
 ### reviews 景點評論資料表
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| id | INTEGER | 主鍵，自動編號 |
-| member_id | INTEGER | 會員編號（外鍵，對應 `members.id`） |
-| attraction_id | INTEGER | 景點編號（外鍵，對應 `attractions.id`） |
-| rating_scenery / rating_culture / rating_access / rating_value / rating_overall | INTEGER | 5 個面向星級評分（1~5） |
-| title | TEXT | 評論標題 |
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| member_id | INT | 會員編號（外鍵，對應 `members.id`） |
+| attraction_id | INT | 景點編號（外鍵，對應 `attractions.id`） |
+| rating_scenery / rating_culture / rating_access / rating_value / rating_overall | INT | 5 個面向星級評分（1～5） |
+| title | VARCHAR(150) | 評論標題 |
 | content | TEXT | 評論內容 |
-| created_at | TEXT | 建立時間 |
+| created_at | DATETIME | 建立日期與時間，預設為目前時間 |
 
 ### review_media 評論照片／影片資料表
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| id | INTEGER | 主鍵，自動編號 |
-| review_id | INTEGER | 評論編號（外鍵，對應 `reviews.id`） |
-| media_type | TEXT | 媒體類型（image／video） |
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| review_id | INT | 評論編號（外鍵，對應 `reviews.id`） |
+| media_type | VARCHAR(20) | 媒體類型（image／video） |
 | url | TEXT | 媒體網址 |
-| created_at | TEXT | 建立時間 |
+| created_at | DATETIME | 建立日期與時間，預設為目前時間 |
 
 目前先用網址形式儲存，尚未接真正的檔案上傳服務。
 
 ### trip_groups 揪團資料表
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| id | INTEGER | 主鍵，自動編號 |
-| organizer_id | INTEGER | 發起人會員編號（外鍵，對應 `members.id`） |
-| attraction_id / itinerary_id | INTEGER | 選填外鍵，對應景點或遊程 |
-| title | TEXT | 揪團標題 |
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| organizer_id | INT | 發起人會員編號（外鍵，對應 `members.id`） |
+| attraction_id / itinerary_id | INT | 選填外鍵，對應景點或遊程 |
+| title | VARCHAR(150) | 揪團標題 |
 | description | TEXT | 揪團說明 |
-| departure_date | TEXT | 出發日期 |
-| max_members | INTEGER | 人數上限 |
-| status | TEXT | 狀態（open/full/closed/completed/cancelled） |
-| created_at | TEXT | 建立時間 |
+| contact_info | TEXT | Discord／LINE 等聯繫方式 |
+| departure_date | DATE | 出發日期 |
+| review_deadline | DATE | 團主預計完成審核的日期 |
+| max_members | INT | 人數上限，預設為 4 人 |
+| status | VARCHAR(20) | 狀態（open／full／closed／completed／cancelled） |
+| created_at | DATETIME | 建立日期與時間，預設為目前時間 |
+
+### trip_group_messages 揪團留言資料表
+| 欄位 | 型別 | 說明 |
+|---|---|---|
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| trip_group_id | INT | 揪團編號（外鍵，對應 `trip_groups.id`） |
+| member_id | INT | 留言會員編號（外鍵，對應 `members.id`） |
+| content | TEXT | 留言內容 |
+| reply_to_id | INT | 被回覆留言的編號；沒有回覆對象時可為空值 |
+| created_at | DATETIME | 建立日期與時間，預設為目前時間 |
 
 ### trip_group_members 揪團成員資料表
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| id | INTEGER | 主鍵，自動編號 |
-| trip_group_id | INTEGER | 揪團編號（外鍵，對應 `trip_groups.id`） |
-| member_id | INTEGER | 會員編號（外鍵，對應 `members.id`） |
-| status | TEXT | 申請狀態（pending/approved/rejected） |
-| joined_at | TEXT | 申請／加入時間 |
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| trip_group_id | INT | 揪團編號（外鍵，對應 `trip_groups.id`） |
+| member_id | INT | 會員編號（外鍵，對應 `members.id`） |
+| status | VARCHAR(20) | 申請狀態（pending／approved／rejected） |
+| application_message | TEXT | 申請者的自我介紹、加入原因及行程想法 |
+| joined_at | DATETIME | 申請／加入日期與時間 |
 
 ### companion_ratings 旅伴互評資料表
 | 欄位 | 型別 | 說明 |
 |---|---|---|
-| id | INTEGER | 主鍵，自動編號 |
-| trip_group_id | INTEGER | 揪團編號（外鍵，對應 `trip_groups.id`） |
-| rater_id / ratee_id | INTEGER | 評分者／被評分者會員編號（皆為外鍵，對應 `members.id`） |
-| rating_punctual / rating_communication / rating_respect / rating_overall | INTEGER | 4 個面向星級評分（1~5） |
+| id | INT | 主鍵，使用 `AUTO_INCREMENT` 自動編號 |
+| trip_group_id | INT | 揪團編號（外鍵，對應 `trip_groups.id`） |
+| rater_id / ratee_id | INT | 評分者／被評分者會員編號（皆為外鍵，對應 `members.id`） |
+| rating_punctual / rating_communication / rating_respect / rating_overall | INT | 4 個面向星級評分（1～5） |
 | comment | TEXT | 評語 |
-| created_at | TEXT | 建立時間 |
+| created_at | DATETIME | 建立日期與時間，預設為目前時間 |
 
 限制：只有同團「已核准」的成員、且出發日期已過，才能互相評價。
 
