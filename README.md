@@ -494,7 +494,7 @@ Figma 設計稿：[走部落 TribeWalk｜完整網站 UI 設計稿](https://www.
 #### 揪團列表
 ![揪團列表畫面](docs/screenshots/groups.png)
 
-### 揪團留言板
+#### 揪團留言板
 ![揪團留言板](docs/screenshots/group-message-board.png)
 登入會員可在揪團詳情頁公開留言，與其他旅伴討論集合時間及行前準備；團主也能針對個別留言進行回覆。
 
