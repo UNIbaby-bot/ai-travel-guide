@@ -14,9 +14,26 @@
 [![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)](https://www.figma.com/)
 
-[專題簡介](#-專題簡介) ・ [核心功能](#-核心功能) ・ [系統架構](#-系統架構) ・ [畫面預覽](#-專案畫面預覽) ・ [安裝方式](#-開發環境安裝與啟動)
+[專案背景](#-專案背景與個人角色) ・ [專題簡介](#-專題簡介) ・ [核心功能](#-核心功能) ・ [系統架構](#-系統架構) ・ [畫面預覽](#-專案畫面預覽) ・ [安裝方式](#-開發環境安裝與啟動)
 
 </div>
+
+---
+
+## 👤 專案背景與個人角色
+
+本專案為勞動部勞動力發展署中彰投分署自辦職前訓練  <br>
+「AI 輔助全端程式設計與專案實作班」之個人結訓專題。<br>
+
+「走部落 TribeWalk」為個人獨立完成的 AI 輔助全端網站。<br>  
+從主題發想、資料蒐集、使用者角色、<br> 
+功能與操作流程、網站內容及介面方向， <br> 
+到 AI 協作開發、功能測試、問題修正與<br> 
+GitHub 文件整理，皆由本人統籌執行。<br> 
+
+開發過程運用 ChatGPT、Claude 等生成式 AI<br> 
+進行程式協作、除錯與文件整理，<br>  
+並由本人負責需求拆解、功能驗證及迭代調整。
 
 ---
 
