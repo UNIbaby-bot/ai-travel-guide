@@ -94,6 +94,14 @@ PHP 以 JSON 回傳結果
       ↓
 JavaScript 更新網頁內容
 ```
+## 🗺️ 系統與頁面流程規劃
+
+在動手開發前，已透過 **Figma** 完整規劃使用者動線與頁面跳轉邏輯，確保系統互動體驗流暢。
+
+* **[點此查看 Figma 實際網站頁面流程圖](https://www.figma.com/board/ZBpvOls9LcuUXXujNjjfkA/%E8%B5%B0%E9%83%A8%E8%90%BD%EF%BD%9C%E5%AF%A6%E9%9A%9B%E7%B6%B2%E7%AB%99%E9%A0%81%E9%9D%A2%E6%B5%81%E7%A8%8B%E5%9C%96?node-id=0-1&t=btkQV0iva6vTFPm9-1)**
+
+*(建議您將 Figma 流程圖匯出成圖片，放到專案資料夾中，用下方語法內嵌)*
+![走部落頁面流程圖](docs/screenshots/stem-flowchart.png)
 
 ## ✨ 核心功能
 
